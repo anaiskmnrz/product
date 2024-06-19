@@ -18,6 +18,9 @@ public class ProductService {
     }
 
     public List<Product> getProducts() {
+        System.out.println("product repository : " + productRepository);
+        List<Product> products = productRepository.findAll();
+        System.out.println("products : " + products);
         return productRepository.findAll();
     }
 
@@ -41,13 +44,5 @@ public class ProductService {
                             final String inventoryStatus, final int rating) {
         Product product = new Product(code, name, description, image, price, category, quantity, inventoryStatus, rating);
         return this.productRepository.save(product);
-    }
-
-    @Transactional
-    public Product patchProduct(final String code, final String name, final String description,
-                                final String image, final int price, final String category, final int quantity,
-                                final String inventoryStatus, final int rating) {
-        
-        return null;
     }
 }

@@ -13,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("products")
+@CrossOrigin(origins = "http://localhost:4200/")
 public class ProductController {
 
     private final ProductService productService;
@@ -39,19 +40,15 @@ public class ProductController {
 
     @PostMapping
     public ResponseEntity<Product> postProduct(@RequestBody @Valid ProductRequestDto productRequest) {
-        Product productSave = productService.postProduct(productRequest.getCode(), productRequest.getName(), productRequest.getDescription(),
-                productRequest.getImage(), productRequest.getPrice(), productRequest.getCategory(),
-                productRequest.getQuantity(), productRequest.getInventoryStatus(), productRequest.getRating());
+        Product productSave = productService.postProduct(productRequest.getCode(), productRequest.getName(),
+                productRequest.getDescription(), productRequest.getImage(), productRequest.getPrice(),
+                productRequest.getCategory(),  productRequest.getQuantity(), productRequest.getInventoryStatus(),
+                productRequest.getRating());
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(productSave);
     }
 
-    /** request body
-     * not null sauf image et rating, peut-être le présenter autrement ? voir code norauto
-     * try catch
-     * catch exepctions du service + exceptions générales
-     *
-     * voir lombok
-     *
-     * faire update
-     */
+    @PatchMapping("/{id}")
+    public ResponseEntity<Product> patchProduct(@PathVariable final int id) {
+        return null;
+    }
 }
